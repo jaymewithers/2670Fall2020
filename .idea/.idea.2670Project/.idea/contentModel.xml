@@ -20,6 +20,7 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="IfStatements.cs" t="Include" />
+          <e p="IntData.cs" t="Include" />
         </e>
       </e>
       <e p="obj" t="ExcludeRecursive" />
