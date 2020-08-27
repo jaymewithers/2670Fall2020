@@ -3,10 +3,16 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    public int scoreValue;
+    public IntData scoreValue;
+    private Text text;
 
     private void Start()
     {
-        GetComponent<Text>().text = scoreValue.ToString();
+        text = GetComponent<Text>();
+    }
+
+    private void Update()
+    {
+        text.text = scoreValue.value.ToString();
     }
 }
