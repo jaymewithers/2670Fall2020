@@ -7,11 +7,10 @@ public class CharacterMover : MonoBehaviour
     private Vector3 movement;
     public float gravity = 9.81f;
     public float moveSpeed = 3f;
-    public float fastMoveSpeed;
-    public float jumpForce = 10f;
+    public float fastMoveSpeed = 20f;
+    public float jumpForce = 30f;
     public int jumpCountMax = 2;
-    //public float rotateSpeed = 3f;
-    //private Vector3 rotateMovement;
+    public int jumpCount;
 
     private void Start()
     {
@@ -20,25 +19,44 @@ public class CharacterMover : MonoBehaviour
 
     private void Update()
     {
-        //rotateMovement.y = rotateSpeed * Input.GetAxis("Horizontal")*Time.deltaTime;
-        //transform.Rotate(rotateMovement);
-        //movement.x = Input.GetAxis("Horizontal") * moveSpeed;
-        
-        if (Input.GetButtonDown("Jump"))
+        movement.x = Input.GetAxis("Horizontal") * moveSpeed;
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            moveSpeed = fastMoveSpeed;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            moveSpeed = 3f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            jumpForce = 0;
+        }
+
+        if (Input.GetKeyUp(KeyCode.B))
+        {
+            jumpForce = 30f;
+        }
+
+        if (Input.GetButtonDown("Jump") && jumpCount <= jumpCountMax)
         {
             movement.y = jumpForce;
+            jumpCount++;
         }
 
         if (controller.isGrounded)
         {
             movement.y = 0;
+            jumpCount = 0;
         }
         else
         {
             movement.y -= gravity;
         }
-
-        //movement = transform.TransformDirection(movement);
+        
         controller.Move(movement * Time.deltaTime);
     }
 }

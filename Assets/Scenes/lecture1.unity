@@ -426,9 +426,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: 3
   moveSpeed: 10
-  fastMoveSpeed: 0
+  fastMoveSpeed: 20
   jumpForce: 30
   jumpCountMax: 2
+  jumpCount: 0
 --- !u!1 &1435388673
 GameObject:
   m_ObjectHideFlags: 0
