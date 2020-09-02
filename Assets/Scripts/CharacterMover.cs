@@ -9,7 +9,7 @@ public class CharacterMover : MonoBehaviour
     public float moveSpeed = 3f;
     public float fastMoveSpeed = 20f;
     public float jumpForce = 30f;
-    public int jumpCountMax = 2;
+    public int jumpCountMax = 1;
     public int jumpCount;
 
     private void Start()
@@ -31,12 +31,12 @@ public class CharacterMover : MonoBehaviour
             moveSpeed = 3f;
         }
 
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.RightControl))
         {
             jumpForce = 0;
         }
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.RightControl))
         {
             jumpForce = 30f;
         }
