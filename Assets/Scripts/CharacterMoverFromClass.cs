@@ -6,7 +6,7 @@ public class CharacterMoverFromClass : MonoBehaviour
     private CharacterController controller;
     private Vector3 movement;
 
-    public float moveSpeed = 5f, rotateSpeed = 120f, gravity = -9.81f, jumpForce = 30f;
+    public float moveSpeed = 5f, fastMoveSpeed = 10f, rotateSpeed = 120f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
 
     public int jumpCountMax = 2;
@@ -26,6 +26,16 @@ public class CharacterMoverFromClass : MonoBehaviour
         transform.Rotate(0, hInput, 0);
 
         yVar += gravity * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            moveSpeed = fastMoveSpeed;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            moveSpeed = 5f;
+        }
 
         if (controller.isGrounded && movement.y < 0)
         {
