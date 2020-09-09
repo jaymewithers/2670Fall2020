@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMoverFromClass : MonoBehaviour
@@ -6,20 +8,36 @@ public class CharacterMoverFromClass : MonoBehaviour
     private CharacterController controller;
     private Vector3 movement;
 
-    public float moveSpeed = 5f, fastMoveSpeed = 10f, rotateSpeed = 120f, gravity = -9.81f, jumpForce = 30f;
+    public float rotateSpeed = 120f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
 
-    public int jumpCountMax = 2;
+    public FloatData normalSpeed, fastSpeed;
+    private FloatData moveSpeed;
+
+    public IntData playerJumpCount;
     private int jumpCount;
+
+    public Vector3 currentSpawnPoint;
     
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        moveSpeed = normalSpeed;
     }
     
     private void Update()
     {
-        var vInput = Input.GetAxis("Vertical") * moveSpeed;
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            moveSpeed = fastSpeed;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            moveSpeed = normalSpeed;
+        }
+        
+        var vInput = Input.GetAxis("Vertical") * moveSpeed.value;
         movement.Set(vInput, yVar, 0);
 
         var hInput = Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed;
@@ -27,23 +45,13 @@ public class CharacterMoverFromClass : MonoBehaviour
 
         yVar += gravity * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            moveSpeed = fastMoveSpeed;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            moveSpeed = 5f;
-        }
-
         if (controller.isGrounded && movement.y < 0)
         {
             yVar = -1f;
             jumpCount = 0;
         }
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpCountMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
         {
             yVar = jumpForce;
             jumpCount++;
@@ -51,5 +59,9 @@ public class CharacterMoverFromClass : MonoBehaviour
 
         movement = transform.TransformDirection(movement);
         controller.Move(movement* Time.deltaTime);
+    }
+    private void OnEnable()
+    {
+        // set the position of the player to the location data of the player
     }
 }
