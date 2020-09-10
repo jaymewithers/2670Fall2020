@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMoverFromClass : MonoBehaviour
@@ -17,7 +15,9 @@ public class CharacterMoverFromClass : MonoBehaviour
     public IntData playerJumpCount;
     private int jumpCount;
 
-    public Vector3 currentSpawnPoint;
+    public Vector3Data currentSpawnPoint;
+
+    public Transform playerPosition;
     
     private void Start()
     {
@@ -62,6 +62,7 @@ public class CharacterMoverFromClass : MonoBehaviour
     }
     private void OnEnable()
     {
+        playerPosition.position = currentSpawnPoint.value;
         // set the position of the player to the location data of the player
     }
 }
