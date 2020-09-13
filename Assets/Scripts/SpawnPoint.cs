@@ -9,7 +9,7 @@ public class SpawnPoint : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        vData.value = locationData.currentSpawnPoint.value;
+        locationData.currentSpawnPoint.value = vData.value;
         // set the location data of the player to the current spawn point
     }
 }
