@@ -17,8 +17,6 @@ public class CharacterMoverFromClass : MonoBehaviour
 
     public Vector3Data currentSpawnPoint;
 
-    public Transform playerPosition;
-    
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -62,7 +60,6 @@ public class CharacterMoverFromClass : MonoBehaviour
     }
     private void OnEnable()
     {
-        playerPosition.position = currentSpawnPoint.value;
-        // set the position of the player to the location data of the player
+        transform.position = currentSpawnPoint.value;
     }
 }
