@@ -2,10 +2,10 @@
 
 public class InstancingBehavior : MonoBehaviour
 {
-    public GameObject prefab;
+    public Instancer prefabObj;
 
     public void InstanceAtTransform()
     {
-        Instantiate(prefab, transform);
+        Instantiate(prefabObj, transform);
     }
 }
