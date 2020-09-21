@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 
-public class Knockback : MonoBehaviour
+public class KnockBack : MonoBehaviour
 {
-    public GameObject player, enemy;
+    public ApplyForce script;
+
+    private void Start()
+    {
+        script = GetComponent<ApplyForce>();
+        script.enabled = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        player.transform.position = enemy.transform.position * 2;
+        script.enabled = true;
     }
 }

@@ -4,7 +4,7 @@ public class Death : MonoBehaviour
 {
    public GameObject gameObj;
    public FloatData health;
-   public CharacterMoverFromClass spawnPoint;
+   public CharacterMover spawnPoint;
 
    private void Update()
    {

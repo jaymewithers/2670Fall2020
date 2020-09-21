@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpawnPoint : MonoBehaviour
+public class SpawnPointBehaviour : MonoBehaviour
 {
     public Vector3Data vData;
 

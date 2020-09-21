@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LookAt : MonoBehaviour
+public class LookAtBehaviour : MonoBehaviour
 {
     public Transform lookObj;
 

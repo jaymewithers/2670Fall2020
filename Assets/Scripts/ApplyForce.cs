@@ -13,7 +13,6 @@ public class ApplyForce : MonoBehaviour
         rBody = GetComponent<Rigidbody>();
         var forceDirection = new Vector3(force, 0, 0);
         player.transform.Rotate(playerRotation.value);
-        // forceDirection needs to be based on player rotation (hint scriptable object)
         rBody.AddRelativeForce(forceDirection);
     }
 }
