@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 30
   playerRotation: {fileID: 11400000, guid: 5ab84983d3ef93f4bab95e056684e685, type: 2}
-  player: {fileID: 5193765245247604515}
+  obj: {fileID: 5193765245247604515}
 --- !u!114 &6547602165723587477
 MonoBehaviour:
   m_ObjectHideFlags: 0
