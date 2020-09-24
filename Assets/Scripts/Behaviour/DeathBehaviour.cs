@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Death : MonoBehaviour
+public class DeathBehaviour : MonoBehaviour
 {
    public GameObject gameObj;
    public FloatData health;
