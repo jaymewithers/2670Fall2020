@@ -13,7 +13,6 @@ public class TextBehaviour : MonoBehaviour
         textObj = GetComponent<Text>();
     }
 
-
     private void Update()
     {
         textObj.text = dataObj.value.ToString(CultureInfo.CurrentCulture);
