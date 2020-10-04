@@ -1,27 +1,33 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class CharacterKnockBack : MonoBehaviour
 {
-    public CharacterController controller;
-    public Vector3 knockBackVector;
-    public float knockBackForce = 5f;
-    private float tempForce;
-    
+    private CharacterController controller;
+    private Vector3 move = Vector3.left;
+
     private void Start()
     {
-        tempForce = knockBackForce;
+        controller = GetComponent<CharacterController>();
+    }
+
+    public void Update()
+    {
+        controller.Move(move * Time.deltaTime);
     }
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
-        knockBackForce = tempForce;
-        while (knockBackForce > 0)
+        var i = 2f;
+        move = other.attachedRigidbody.velocity * i;
+
+        while (i > 0)
         {
-            knockBackVector.x = knockBackForce * Time.deltaTime;
-            controller.Move(knockBackVector);
-            knockBackForce -= 0.1f;
             yield return new WaitForFixedUpdate();
+            i -= 0.1f;
         }
+        
+        move = Vector3.left;
     }
 }
