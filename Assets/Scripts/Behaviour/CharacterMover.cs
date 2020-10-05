@@ -56,4 +56,38 @@ public class CharacterMover : MonoBehaviour
         movement = transform.TransformDirection(movement);
         controller.Move(movement* Time.deltaTime);
     }
+
+    //public float playerKnockBackForce = 10f;
+    //private Vector3 knockBackMovement;
+    
+    //private IEnumerator KnockBack (ControllerColliderHit hit)
+    // {
+    //    var i = 2f;
+    // knockBackMovement = hit.collider.attachedRigidbody.velocity * i * playerKnockBackForce;
+
+     //    while (i > 0)
+     //   {
+     //       yield return new WaitForFixedUpdate();
+     //       i -= 0.1f;
+     //   }
+     // }
+
+    private Vector3 direction = Vector3.zero;
+    public float pushPower = 3f;
+    
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        var body = hit.collider.attachedRigidbody;
+
+        if (body == null)
+        {
+            return;
+        }
+        
+        direction.Set(hit.moveDirection.x, 0, hit.moveDirection.z);
+        var pushDirection = direction * pushPower;
+        //body.velocity = pushDirection;
+        body.AddTorque(pushDirection);
+        body.AddRelativeForce(pushDirection);
+    }
 }
