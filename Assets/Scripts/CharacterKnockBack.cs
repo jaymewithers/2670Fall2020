@@ -33,7 +33,6 @@ public class CharacterKnockBack : MonoBehaviour
     }
 
     public float pushPower = 10f;
-    private CharacterController _characterController;
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {

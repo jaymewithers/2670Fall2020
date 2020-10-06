@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMover : MonoBehaviour
@@ -57,20 +58,19 @@ public class CharacterMover : MonoBehaviour
         controller.Move(movement* Time.deltaTime);
     }
 
-    //public float playerKnockBackForce = 10f;
-    //private Vector3 knockBackMovement;
-    
-    //private IEnumerator KnockBack (ControllerColliderHit hit)
-    // {
-    //    var i = 2f;
-    // knockBackMovement = hit.collider.attachedRigidbody.velocity * i * playerKnockBackForce;
+    public float playerKnockBackForce = 10f;
+    private Vector3 knockBackMovement;
 
-     //    while (i > 0)
-     //   {
-     //       yield return new WaitForFixedUpdate();
-     //       i -= 0.1f;
-     //   }
-     // }
+    private IEnumerator KnockBack(ControllerColliderHit hit)
+    {
+        var i = 2f;
+        knockBackMovement = hit.collider.attachedRigidbody.velocity * (i * playerKnockBackForce);
+        while (i > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            i -= 0.1f;
+        }
+    }
 
     private Vector3 direction = Vector3.zero;
     public float pushPower = 3f;
@@ -79,15 +79,21 @@ public class CharacterMover : MonoBehaviour
     {
         var body = hit.collider.attachedRigidbody;
 
-        if (body == null)
+        if (body == null || body.isKinematic)
         {
             return;
         }
+
+        if (hit.moveDirection.y < -0.3)
+        {
+            return;
+        }
+
+        StartCoroutine(KnockBack(hit));
         
-        direction.Set(hit.moveDirection.x, 0, hit.moveDirection.z);
-        var pushDirection = direction * pushPower;
-        //body.velocity = pushDirection;
-        body.AddTorque(pushDirection);
-        body.AddRelativeForce(pushDirection);
+        var pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        var forces = pushDir * pushPower;
+        body.AddRelativeForce(forces);
+        body.AddTorque(forces);
     }
 }
