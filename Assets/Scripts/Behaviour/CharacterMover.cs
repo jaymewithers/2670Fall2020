@@ -7,10 +7,10 @@ public class CharacterMover : MonoBehaviour
     private CharacterController controller;
     private Vector3 movement;
 
-    public float rotateSpeed = 120f, gravity = -9.81f, jumpForce = 10f;
+    public float rotateSpeed = 120f, gravity = -9.81f, jumpForce = 5f, energyChange = 0.1f;
     private float yVar;
 
-    public FloatData normalSpeed, fastSpeed;
+    public FloatData normalSpeed, fastSpeed, playerEnergy;
     private FloatData moveSpeed;
     private bool canMove = true;
 
@@ -21,10 +21,14 @@ public class CharacterMover : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         moveSpeed = normalSpeed;
+        jumpwfs = new WaitForSeconds(jumpDelay);
+        wfs = new WaitForSeconds(holdTime);
         StartCoroutine(Move());
     }
 
     private readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+    public WaitForSeconds wfs, jumpwfs;
+    public float jumpDelay = 0.000000001f;
 
     private IEnumerator Move()
     {
@@ -35,11 +39,23 @@ public class CharacterMover : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 moveSpeed = fastSpeed;
+                StopCoroutine(energyRefill());
+                StartCoroutine(energyDrain());
+                if (playerEnergy.value < 0f)
+                {
+                    StopCoroutine(energyDrain());
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
             {
                 moveSpeed = normalSpeed;
+                StopCoroutine(energyDrain());
+                StartCoroutine(energyRefill());
+                if (playerEnergy.value > 1)
+                {
+                    StopCoroutine(energyRefill());
+                }
             }
 
             var vInput = Input.GetAxis("Vertical") * moveSpeed.value;
@@ -58,12 +74,37 @@ public class CharacterMover : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
             {
+                yield return jumpwfs;
                 yVar = jumpForce;
                 jumpCount++;
             }
 
             movement = transform.TransformDirection(movement);
             controller.Move(movement * Time.deltaTime);
+        }
+    }
+
+    public float holdTime = 1;
+
+    private IEnumerator energyDrain()
+    {
+        while (moveSpeed == fastSpeed && playerEnergy.value > 0)
+        {
+            yield return wffu;
+            yield return wfs;
+            playerEnergy.value -= energyChange;
+            yield return wfs;
+        }
+    }
+
+    private IEnumerator energyRefill()
+    {
+        while (moveSpeed == normalSpeed && playerEnergy.value < 1)
+        {
+            yield return wffu;
+            yield return wfs;
+            playerEnergy.value += energyChange;
+            yield return wfs;
         }
     }
 
@@ -88,8 +129,7 @@ public class CharacterMover : MonoBehaviour
     }
     
     public float pushPower = 10.0f;
-    //private CharacterController characterController;
-    
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         var body = hit.collider.attachedRigidbody;
