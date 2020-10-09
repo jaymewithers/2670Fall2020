@@ -7,10 +7,10 @@ public class AIBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
     public Transform player;
-    private bool canNavigate = true;
+    public bool canNavigate = true;
     private WaitForFixedUpdate wffu;
-    public float holdTime = 1f;
     private WaitForSeconds wfs;
+    public float holdTime = 1f;
 
     private void Start()
     {
