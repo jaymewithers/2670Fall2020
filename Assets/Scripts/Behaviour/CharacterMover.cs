@@ -30,21 +30,30 @@ public class CharacterMover : MonoBehaviour
     public WaitForSeconds wfs, jumpwfs;
     public float jumpDelay = 0.000000001f;
 
+    public bool canRun = true;
+
     private IEnumerator Move()
     {
         canMove = true;
         while (canMove)
         {
             yield return wffu;
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            
+            if (playerEnergy.value < 0)
+            {
+                canRun = false;
+                moveSpeed = normalSpeed;
+            }
+            else
+            {
+                canRun = true;
+            }
+            
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canRun)
             {
                 moveSpeed = fastSpeed;
                 StopCoroutine(energyRefill());
                 StartCoroutine(energyDrain());
-                if (playerEnergy.value < 0f)
-                {
-                    StopCoroutine(energyDrain());
-                }
             }
 
             if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -52,10 +61,6 @@ public class CharacterMover : MonoBehaviour
                 moveSpeed = normalSpeed;
                 StopCoroutine(energyDrain());
                 StartCoroutine(energyRefill());
-                if (playerEnergy.value > 1)
-                {
-                    StopCoroutine(energyRefill());
-                }
             }
 
             var vInput = Input.GetAxis("Vertical") * moveSpeed.value;
@@ -84,28 +89,26 @@ public class CharacterMover : MonoBehaviour
         }
     }
 
-    public float holdTime = 1;
+    public float holdTime = 1f;
 
-    private IEnumerator energyDrain()
-    {
-        while (moveSpeed == fastSpeed && playerEnergy.value > 0)
+     private IEnumerator energyDrain()
+     {
+         while (moveSpeed == fastSpeed && playerEnergy.value > 0)
         {
-            yield return wffu;
-            yield return wfs;
+            yield return wffu; 
             playerEnergy.value -= energyChange;
             yield return wfs;
         }
-    }
-
-    private IEnumerator energyRefill()
+     }
+    
+     private IEnumerator energyRefill()
     {
-        while (moveSpeed == normalSpeed && playerEnergy.value < 1)
-        {
-            yield return wffu;
-            yield return wfs;
+         while (moveSpeed == normalSpeed && playerEnergy.value < 1)
+         {
+             yield return wffu;
             playerEnergy.value += energyChange;
-            yield return wfs;
-        }
+             yield return wfs;
+         }
     }
 
     private IEnumerator KnockBack(ControllerColliderHit hit, Rigidbody body)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UpdateValueCoroutine : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class UpdateValueCoroutine : MonoBehaviour
     private WaitForFixedUpdate wffu;
     public WaitForSeconds wfs;
     public float delay = 1f;
+    
 
     private void Start()
     {
