@@ -24,6 +24,7 @@ public class CharacterMover : MonoBehaviour
         jumpwfs = new WaitForSeconds(jumpDelay);
         wfs = new WaitForSeconds(holdTime);
         StartCoroutine(Move());
+        StartCoroutine(energyRefill());
     }
 
     private readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();

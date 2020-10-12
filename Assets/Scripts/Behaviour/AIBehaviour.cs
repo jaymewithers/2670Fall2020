@@ -1,42 +1,41 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIBehaviour : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    public Transform player;
-    public bool canNavigate = true;
-    private WaitForFixedUpdate wffu;
-    private WaitForSeconds wfs;
-    public float holdTime = 1f;
+   private WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+   private NavMeshAgent agent;
+   public Transform player;
+   private bool canHunt, canPatrol;
 
-    private void Start()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        wfs = new WaitForSeconds(holdTime);
-    }
+   private void Start()
+   {
+      agent = GetComponent<NavMeshAgent>();
+      StartCoroutine(Patrol());
+   }
 
-    private IEnumerator Navigate()
-    {
-        canNavigate = true;
-        yield return wfs;
-        while (canNavigate)
-        {
-            yield return wffu;
-            agent.destination = player.position;
-        }
-    }
+   private IEnumerator OnTriggerEnter(Collider other)
+   {
+      canHunt = true;
+      while (canHunt)
+      {
+         yield return wffu;
+         agent.destination = player.position;
+      }
+   }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        canNavigate = false;
-        StartCoroutine(Navigate());
-    }
+   private void OnTriggerExit(Collider other)
+   {
+      canHunt = false;
+      StartCoroutine(Patrol());
+   }
 
-    private void OnTriggerExit(Collider other)
-    {
-        canNavigate = false;
-    }
+   private IEnumerator Patrol()
+   {
+      canPatrol = true;
+      yield break;
+   }
 }
