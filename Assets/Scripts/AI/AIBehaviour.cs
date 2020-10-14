@@ -22,6 +22,7 @@ public class AIBehaviour : MonoBehaviour
 
    private void OnTriggerEnter(Collider other)
    {
+      canHunt = true;
       canPatrol = false;
       StartCoroutine(Hunt());
    }

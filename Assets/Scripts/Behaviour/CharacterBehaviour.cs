@@ -2,39 +2,42 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class CharacterMover : MonoBehaviour
+//inheriting scripts should automatically require this
+public class CharacterBehaviour : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 movement;
-
-    public float rotateSpeed = 120f, gravity = -9.81f, jumpForce = 5f, energyChange = 0.1f;
+    //protected is like private but inheriting scripts can read it too
+    //private is only this script
+    protected readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+    protected CharacterController controller;
+    protected Vector3 movement;
+    protected bool canMove = true;
+    
     private float yVar;
-
-    public FloatData normalSpeed, fastSpeed, playerEnergy;
     private FloatData moveSpeed;
-    private bool canMove = true;
-
-    public IntData playerJumpCount;
     private int jumpCount;
-
+    
+    public float rotateSpeed = 120f, gravity = -9.81f, jumpForce = 5f, energyChange = 0.1f;
+    public FloatData normalSpeed, fastSpeed, playerEnergy;
+    public IntData playerJumpCount;
+    public bool canRun = true;
+    public WaitForSeconds wfs, jumpWfs;
+    public float jumpDelay = 0.000000001f;
+    public float holdTime = 1f;
+    
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         moveSpeed = normalSpeed;
-        jumpwfs = new WaitForSeconds(jumpDelay);
+        jumpWfs = new WaitForSeconds(jumpDelay);
         wfs = new WaitForSeconds(holdTime);
         StartCoroutine(Move());
         StartCoroutine(energyRefill());
     }
-
-    private readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();
-    public WaitForSeconds wfs, jumpwfs;
-    public float jumpDelay = 0.000000001f;
-
-    public bool canRun = true;
-
-    private IEnumerator Move()
+    
+    private protected IEnumerator Move()
     {
+        //put move coding to onMove and leave out rotation stuff.
+        //do the same for jumping stuff?
         canMove = true;
         while (canMove)
         {
@@ -64,6 +67,7 @@ public class CharacterMover : MonoBehaviour
                 StartCoroutine(energyRefill());
             }
 
+            // rotation gets moved to on rotate. protected virtual void OnRotate
             var vInput = Input.GetAxis("Vertical") * moveSpeed.value;
             movement.Set(vInput, yVar, 0);
 
@@ -80,7 +84,7 @@ public class CharacterMover : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
             {
-                yield return jumpwfs;
+                yield return jumpWfs;
                 yVar = jumpForce;
                 jumpCount++;
             }
@@ -89,65 +93,27 @@ public class CharacterMover : MonoBehaviour
             controller.Move(movement * Time.deltaTime);
         }
     }
+    
+    //energy drain and energy refill move to a new script inheriting from this one? make variables protected.
+    //would need a script that has energy but also has knockback that inherits from this?
 
-    public float holdTime = 1f;
-
-     private IEnumerator energyDrain()
-     {
-         while (moveSpeed == fastSpeed && playerEnergy.value > 0)
+    private IEnumerator energyDrain()
+    {
+        while (moveSpeed == fastSpeed && playerEnergy.value > 0)
         {
             yield return wffu; 
             playerEnergy.value -= energyChange;
             yield return wfs;
         }
-     }
-    
-     private IEnumerator energyRefill()
-    {
-         while (moveSpeed == normalSpeed && playerEnergy.value < 1)
-         {
-             yield return wffu;
-            playerEnergy.value += energyChange;
-             yield return wfs;
-         }
     }
-
-    private IEnumerator KnockBack(ControllerColliderHit hit, Rigidbody body)
+    
+    private IEnumerator energyRefill()
     {
-        canMove = false;
-        var i = 2f;
-        movement = -hit.moveDirection;
-        movement.y = -1;
-        while (i > 0)
+        while (moveSpeed == normalSpeed && playerEnergy.value < 1)
         {
             yield return wffu;
-            i -= 0.1f;
-            controller.Move((movement) * Time.deltaTime);
-            
-            var pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-            var forces = pushDir * pushPower;
-            body.AddForce(forces);
+            playerEnergy.value += energyChange;
+            yield return wfs;
         }
-        movement = Vector3.zero;
-        StartCoroutine(Move());
-    }
-    
-    public float pushPower = 10.0f;
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        var body = hit.collider.attachedRigidbody;
-
-        if (body == null || body.isKinematic)
-        {
-            return;
-        }
-
-        if (hit.moveDirection.y < -0.3)
-        {
-            return;
-        }
-
-        StartCoroutine(KnockBack(hit, body));
     }
 }

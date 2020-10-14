@@ -1889,9 +1889,15 @@ MonoBehaviour:
   rotateSpeed: 120
   gravity: -9.81
   jumpForce: 30
+  energyChange: 0.1
   normalSpeed: {fileID: 11400000, guid: ad598f17b08c81948a92919a9d16e8c2, type: 2}
   fastSpeed: {fileID: 11400000, guid: 93531c490c46d324bb53c165d1d19408, type: 2}
+  playerEnergy: {fileID: 11400000, guid: af42e1e22a41a5f48adcb9d5ae05d2af, type: 2}
   playerJumpCount: {fileID: 11400000, guid: 00d998ce4d3b7ad4b91ae9e7d07a2033, type: 2}
+  jumpDelay: 0.000000001
+  canRun: 1
+  holdTime: 1
+  pushPower: 10
 --- !u!23 &1326309322
 MeshRenderer:
   m_ObjectHideFlags: 0
