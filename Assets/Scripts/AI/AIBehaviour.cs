@@ -10,7 +10,7 @@ public class AIBehaviour : MonoBehaviour
    private NavMeshAgent agent;
    public Transform player;
    public List<Transform> patrolPoints;
-   private bool canHunt, canPatrol; 
+   private bool canHunt, canPatrol;
    private int i;
 
    private void Start()
@@ -19,23 +19,20 @@ public class AIBehaviour : MonoBehaviour
       agent = GetComponent<NavMeshAgent>();
       StartCoroutine(Patrol());
    }
-   
+
    private void OnTriggerEnter(Collider other)
    {
-      canPatrol = true;
-      StopCoroutine(Patrol());
-      canHunt = true;
+      canPatrol = false;
       StartCoroutine(Hunt());
    }
-   
+
    private void OnTriggerExit(Collider other)
    {
       canHunt = false;
-      StopCoroutine(Hunt());
       canPatrol = true;
       StartCoroutine(Patrol());
    }
-   
+
    private IEnumerator Hunt()
    {
       canHunt = true;
@@ -51,7 +48,8 @@ public class AIBehaviour : MonoBehaviour
       canPatrol = true;
       while (canPatrol)
       {
-         if (agent.pathPending || !(agent.remainingDistance < 0.5f)) yield break;
+         yield return wffu;
+         if (agent.pathPending || !(agent.remainingDistance < 0.5f)) continue;
          agent.destination = patrolPoints[i].position;
          i = (i + 1) % patrolPoints.Count;
       }
