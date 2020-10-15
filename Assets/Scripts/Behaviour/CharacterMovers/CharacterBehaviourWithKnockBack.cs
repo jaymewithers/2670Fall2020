@@ -5,11 +5,12 @@ using UnityEngine;
 public class CharacterBehaviourWithKnockBack : CharacterBehaviour
 {
     public float pushPower = 10.0f;
-    //you don't need both scripts on the object. if you want knockback add this one. no knockback add the base behaviour
+    
     private IEnumerator KnockBack(ControllerColliderHit hit, Rigidbody body)
     {
         canMove = false;
         var i = 2f;
+        
         movement = -hit.moveDirection;
         movement.y = -1;
         while (i > 0)
