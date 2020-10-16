@@ -96,25 +96,22 @@ public class CharacterBehaviour : MonoBehaviour
     }
     
     private IEnumerator energyDrain()
+    {
+        while (moveSpeed == fastSpeed && playerEnergy.value > 0)
         {
-            while (moveSpeed == fastSpeed && playerEnergy.value > 0)
-            {
-                yield return wffu; 
-                playerEnergy.value -= energyChange;
-                yield return wfs;
-            }
+            yield return wffu; 
+            playerEnergy.value -= energyChange;
+            yield return wfs;
         }
+    }
         
-        private IEnumerator energyRefill()
+    private IEnumerator energyRefill()
+    {
+        while (moveSpeed == normalSpeed && playerEnergy.value < 1) 
         {
-            while (moveSpeed == normalSpeed && playerEnergy.value < 1)
-            {
-                yield return wffu;
-                playerEnergy.value += energyChange;
-                yield return wfs;
-            }
+            yield return wffu;
+            playerEnergy.value += energyChange;
+            yield return wfs;
         }
+    }
 }
-
-//energy drain and energy refill move to a new script inheriting from this one? make variables protected.
-    //would need a script that has energy but also has knockback that inherits from this?
