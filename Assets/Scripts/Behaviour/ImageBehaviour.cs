@@ -11,8 +11,8 @@ public class ImageBehaviour : MonoBehaviour
     {
         imageObj = GetComponent<Image>();
     }
-    
-    void Update()
+
+    public void Update()
     {
         imageObj.fillAmount = valueObj.value;
     }
