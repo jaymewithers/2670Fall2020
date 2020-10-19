@@ -7,6 +7,7 @@ public class TextBehaviour : MonoBehaviour
 {
     private Text textObj;
     public FloatData dataObj;
+    public StringListData value;
 
     private void Start()
     {
@@ -16,5 +17,10 @@ public class TextBehaviour : MonoBehaviour
     private void Update()
     {
         textObj.text = dataObj.value.ToString(CultureInfo.CurrentCulture);
+    }
+    
+    public void TextToStringData()
+    {
+        textObj.text = value.ToString();
     }
 }

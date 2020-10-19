@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c82868664056a44893a2598f4364aa6, type: 3}
-  m_Name: Health
+  m_Script: {fileID: 11500000, guid: 3a3436121d20eb3439e1ef616c6b4075, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
-  value: 1
+  stringList:
+  - Welcome!
+  - What is your Quest?
+  - What is your favorite color?
+  - 
