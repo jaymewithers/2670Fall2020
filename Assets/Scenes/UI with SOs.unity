@@ -612,6 +612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1090158518}
   - component: {fileID: 1090158517}
+  - component: {fileID: 1090158519}
   m_Layer: 0
   m_Name: GameControl
   m_TagString: Untagged
@@ -646,6 +647,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 508709424e6d2c94d94d60b1deece322, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetValue
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEnable:
     m_PersistentCalls:
       m_Calls: []
@@ -663,6 +676,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1090158519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090158516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc3685628c42c740bd6b38c59711e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObj: {fileID: 1801668571}
+  health: {fileID: 11400000, guid: 850506e1642effd4986bfb685aa19950, type: 2}
+  lives: {fileID: 11400000, guid: 508709424e6d2c94d94d60b1deece322, type: 2}
+  spawnPoint: {fileID: 11400000, guid: 129fd61066a969d45adaefa1098dd25f, type: 2}
 --- !u!1 &1396823141
 GameObject:
   m_ObjectHideFlags: 0

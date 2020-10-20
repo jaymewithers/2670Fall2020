@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c82868664056a44893a2598f4364aa6, type: 3}
+  m_Script: {fileID: 11500000, guid: f4b18c2be5ee1fa498f7969f6badb5d4, type: 3}
   m_Name: PlayerLives
   m_EditorClassIdentifier: 
-  value: 3
+  value: 1
+  lessThanZeroEvent:
+    m_PersistentCalls:
+      m_Calls: []
