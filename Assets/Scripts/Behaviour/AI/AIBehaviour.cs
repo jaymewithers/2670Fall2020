@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIBehaviour : MonoBehaviour
 {
-   private WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+   private readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();
    private NavMeshAgent agent;
    public Transform player;
    public List<Transform> patrolPoints;
