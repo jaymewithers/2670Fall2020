@@ -4,12 +4,21 @@
 public class ApplyForce : MonoBehaviour
 {
     private Rigidbody rBody;
-    public float force = 500f;
+    public Vector3 forces;
 
-    public void Start()
+    public bool canRunOnStart;
+
+    private void Start()
     {
         rBody = GetComponent<Rigidbody>();
-        var forceDirection = new Vector3(force, 0, 0);
-        rBody.AddRelativeForce(forceDirection);
+        if (canRunOnStart)
+        {
+            OnApplyForce();
+        }
+    }
+
+    public void OnApplyForce()
+    {
+        rBody.AddRelativeForce(forces);
     }
 }
