@@ -2,11 +2,11 @@
 
 public class KnockBack : MonoBehaviour
 {
-    public ApplyForce script;
+    public ApplyForceVector script;
 
     private void Start()
     {
-        script = GetComponent<ApplyForce>();
+        script = GetComponent<ApplyForceVector>();
         script.enabled = false;
     }
 

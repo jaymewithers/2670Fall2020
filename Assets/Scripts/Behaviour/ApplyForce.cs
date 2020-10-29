@@ -1,24 +1,14 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class ApplyForce : MonoBehaviour
 {
     private Rigidbody rBody;
-    public Vector3 forces;
-
-    public bool canRunOnStart;
+    public float force = 500f;
 
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
-        if (canRunOnStart)
-        {
-            OnApplyForce();
-        }
-    }
-
-    public void OnApplyForce()
-    {
-        rBody.AddRelativeForce(forces);
+        var forceDirection = new Vector3(force, 0,0);
+        rBody.AddRelativeForce(forceDirection);
     }
 }
