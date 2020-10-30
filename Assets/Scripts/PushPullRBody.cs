@@ -1,25 +1,47 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class PushPullRBody : MonoBehaviour
 {
-    public bool canDrag;
-    public UnityEvent dragEvent, stopDragEvent;
+    public Transform player, obj;
+    public bool canPush;
+    public Vector3 newPosition, offset;
 
     private void OnTriggerEnter(Collider other)
     {
-        canDrag = true;
-        if (canDrag)
-        {
-            dragEvent.Invoke();
-        }
+        canPush = true;
+        StartCoroutine(OnPush());
     }
 
-    private void OnTriggerExit(Collider other)
+    private IEnumerator OnPush()
     {
-        canDrag = false;
-        stopDragEvent.Invoke();
+        print("Started Coroutine");
+        yield return new WaitForFixedUpdate();
+        while (canPush)
+        {
+            newPosition = player.transform.position + offset;
+            obj.transform.position = newPosition;
+        }
     }
 }
+// public bool canDrag;
+    // public UnityEvent dragEvent, stopDragEvent;
+    //
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     canDrag = true;
+    //     if (canDrag)
+    //     {
+    //         dragEvent.Invoke();
+    //     }
+    // }
+    //
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     canDrag = false;
+    //     stopDragEvent.Invoke();
+    // }
 
 //other.transform.parent = player.transform;
