@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-public class EnemyHealth : FloatData
+﻿public class EnemyHealth : FloatData
 {
     private void OnEnable()
     {
