@@ -20,13 +20,13 @@ TagManager:
   - PowerUp
   - 
   - Player
-  - 
+  - PlayerInteraction
   - Ammo
   - 
   - Enemies
-  - 
+  - AI
+  - AiInteraction
   - MovableObjects
-  - 
   - 
   - 
   - 
