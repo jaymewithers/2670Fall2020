@@ -6,13 +6,14 @@ public class NavAgentBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
     private Transform destination;
-    public GameAction gameActionObj;
+    public GameAction gameActionObj, callForTransformAction;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         destination = transform;
         gameActionObj.transformAction += HandleTransform;
+        callForTransformAction.action?.Invoke();
     }
 
     private void HandleTransform(Transform obj)
