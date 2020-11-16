@@ -10,6 +10,7 @@ public class PushPullRBody : MonoBehaviour
     private void Start()
     {
         rBody = GetComponent<Rigidbody>();
+        canPickup = false;
     }
 
     private void Update()
@@ -30,7 +31,10 @@ public class PushPullRBody : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        canPickup = true;
+        if (other.CompareTag("Player"))
+        {
+            canPickup = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
