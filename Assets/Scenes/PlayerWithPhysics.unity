@@ -170,6 +170,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!135 &219672258
 SphereCollider:
@@ -306,6 +309,9 @@ MonoBehaviour:
           m_StringArgument: Collect
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!135 &254445276
 SphereCollider:
@@ -394,7 +400,6 @@ GameObject:
   - component: {fileID: 368771426}
   - component: {fileID: 368771429}
   - component: {fileID: 368771428}
-  - component: {fileID: 368771427}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -421,20 +426,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200.5, y: -101}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &368771427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 368771425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bde3f59441941d147bc6adf705c3aa1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textObj: {fileID: 368771428}
-  value: {fileID: 11400000, guid: 745bd957d32e3fc49aad58d7511ad939, type: 2}
 --- !u!114 &368771428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,6 +527,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!135 &416926713
 SphereCollider:
@@ -864,6 +858,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!135 &743881722
 SphereCollider:
@@ -988,6 +985,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5193765245247604515, guid: 47bf444b535311941be635e5565eb1f2, type: 3}
   rotationDirection: {fileID: 11400000, guid: 5d1db1739f289134b8f46475e4989e9a, type: 2}
+  holdTime: 0.5
+  instanceCount: 10
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onCallEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  restartLoopEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!23 &805017217
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1084,6 +1092,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!135 &882400022
 SphereCollider:
@@ -1208,6 +1219,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!135 &975232824
 SphereCollider:
@@ -1444,19 +1458,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerEnterEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 368771427}
-        m_TargetAssemblyTypeName: TextDisplayBehaviour, Assembly-CSharp
-        m_MethodName: TextToStringData
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hello World
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!136 &1101569766
 CapsuleCollider:
@@ -1695,6 +1700,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5193765245247604515, guid: 47bf444b535311941be635e5565eb1f2, type: 3}
   rotationDirection: {fileID: 11400000, guid: 5d1db1739f289134b8f46475e4989e9a, type: 2}
+  holdTime: 0.5
+  instanceCount: 10
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onCallEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  restartLoopEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!23 &1193025266
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1894,7 +1910,6 @@ MonoBehaviour:
   fastSpeed: {fileID: 11400000, guid: 93531c490c46d324bb53c165d1d19408, type: 2}
   playerEnergy: {fileID: 11400000, guid: af42e1e22a41a5f48adcb9d5ae05d2af, type: 2}
   playerJumpCount: {fileID: 11400000, guid: 00d998ce4d3b7ad4b91ae9e7d07a2033, type: 2}
-  jumpDelay: 0.000000001
   canRun: 1
   holdTime: 1
   pushPower: 10
@@ -2010,6 +2025,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  holdTime: 0.001
+  repeatOnStart: 0
 --- !u!1 &1386608458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2086,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
   delayTime: 1
 --- !u!136 &1386608460
 CapsuleCollider:
