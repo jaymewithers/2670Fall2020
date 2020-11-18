@@ -4,10 +4,15 @@ using UnityEngine.Events;
 
 public class MonoEventsBehaviour : MonoBehaviour
 {
-    public UnityEvent startEvent, onEnable;
+    public UnityEvent startEvent, onEnable, awakeEvent;
     public float holdTime = 0.001f;
 
     public bool repeatOnStart;
+    
+    private void Awake()
+    {
+        awakeEvent.Invoke();
+    }
 
     private IEnumerator Start()
     {

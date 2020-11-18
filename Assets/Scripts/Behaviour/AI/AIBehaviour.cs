@@ -8,7 +8,7 @@ public class AIBehaviour : MonoBehaviour
 {
    private readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();
    private NavMeshAgent agent;
-   public Transform player;
+   public Transform destination;
    public List<Transform> patrolPoints;
    private bool canHunt, canPatrol;
    private int i;
@@ -40,7 +40,7 @@ public class AIBehaviour : MonoBehaviour
       while (canHunt)
       {
          yield return wffu;
-         agent.destination = player.position;
+         agent.destination = destination.position;
       }
    }
 
