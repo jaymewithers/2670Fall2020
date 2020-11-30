@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ObjPickUpBehaviour : MonoBehaviour
+public class PickUpBehaviour : MonoBehaviour
 {
     private Rigidbody rBody;
     private bool canPickUp;
