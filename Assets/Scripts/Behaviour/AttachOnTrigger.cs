@@ -2,13 +2,19 @@
 
 public class AttachOnTrigger : MonoBehaviour
 {
+    public string tagString;
+    public ID idObj;
+    
     private void OnTriggerEnter(Collider other)
     {
-        var otherTag = other.CompareTag("Platform");
-        if (otherTag)
+        var otherID = other.GetComponent<IDHolder>();
+        if (otherID == null) return;
+
+        if (otherID.idObj == idObj)
         {
             transform.parent = other.transform;
         }
+        
     }
 
     private void OnTriggerExit(Collider other)

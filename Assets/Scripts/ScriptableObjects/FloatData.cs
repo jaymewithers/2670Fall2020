@@ -18,6 +18,10 @@ public class FloatData : ScriptableObject
    {
       value += number;
       updateValueEvent.Invoke();
+      if (value <= 0)
+      {
+         lessThanZeroEvent.Invoke();
+      }
    }
 
    public void SetImageFillAmount(Image img)

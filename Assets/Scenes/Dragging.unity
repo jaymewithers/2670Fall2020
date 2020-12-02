@@ -276,6 +276,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 40e2cbb127121c743ab3a44bd8f8e5f1, type: 2}
+    - target: {fileID: 4739767889761116147, guid: 6424f75fcf0bc14488c2151d3daf996f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8870063068806943806, guid: 6424f75fcf0bc14488c2151d3daf996f, type: 3}
       propertyPath: m_Name
       value: PlatformHolder (1)
@@ -330,7 +334,11 @@ MonoBehaviour:
   onEnable:
     m_PersistentCalls:
       m_Calls: []
+  awakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
   holdTime: 3
+  repeatOnStart: 0
 --- !u!114 &284758958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +353,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4169842608781087194, guid: ed90ff020f66d4047b6714d55103c880, type: 3}
   rotationDirection: {fileID: 11400000, guid: da525eb720c292341ab06b84b6b58435, type: 2}
+  holdTime: 0.5
+  instanceCount: 10
+  startEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onCallEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  restartLoopEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &284758959
 Transform:
   m_ObjectHideFlags: 0
@@ -597,7 +616,11 @@ MonoBehaviour:
   onEnable:
     m_PersistentCalls:
       m_Calls: []
+  awakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
   holdTime: 0.001
+  repeatOnStart: 0
 --- !u!4 &1090158518
 Transform:
   m_ObjectHideFlags: 0
@@ -663,6 +686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forces: {x: -200, y: 300, z: 0}
+  canRunOnStart: 0
 --- !u!54 &1191908237
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -784,6 +808,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  holdTime: 0
 --- !u!1 &1396823141
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130d51c52aa080c48bc877ac30736a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagString: Platform
+  idObj: {fileID: 11400000, guid: 1ffdf42341940cf4fa1386a051f85088, type: 2}
 --- !u!65 &1801668579
 BoxCollider:
   m_ObjectHideFlags: 0
